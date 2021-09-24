@@ -1,0 +1,126 @@
+*,
+*:after,
+*:before 
+  box-sizing: border-box
+  outline: none
+  
+body
+  margin: 0
+  font-family: 'Inter', -apple-system, system-ui, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  background-color: #E7F6FF
+
+code
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
+
+.wrapper
+  background-color: #fff
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04)
+  border-radius: 1.25em
+  max-width: (1080em / 16)
+  margin: auto
+
+
+.header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: (44em/16) (54em/16)
+  border-bottom: 1px solid #f4f4f4
+
+  &__logo
+    display: flex
+    align-items: center
+
+    &-icon
+      margin-right: 1em
+    
+    &-title
+      text-transform: uppercase
+      font-weight: 700
+      font-size: 1.25em
+    
+    &-slogan
+      font-size: 0.875em  
+      color: #9D9D9D
+
+  p
+    margin: 0
+
+  &__sign
+    // 
+    
+  &__sign-item
+    display: flex
+    align-items: center
+
+    svg
+      &:not(:last-child)
+        margin-right: 0.625em
+    
+    span
+      color: #5C5C5C
+      font-size: 0.875em  
+      font-weight: 600
+
+    &:not(:last-child)
+      margin-right: (30em / 16)
+
+
+.content
+  padding: (44em/16) (60em/16)
+
+.main-title
+  font-size: 2em
+  margin-bottom: 1em
+  margin-top: 0
+
+.cards
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+
+.card
+  border: 1px solid #f8f8f8
+  padding: 1.25em
+  width: (210em/16)
+  border-radius: (40em/ 16)
+  padding: 1.25em 1.75em 2em
+
+  &__img
+    max-width: 100%
+    margin-bottom: 0.875em
+  
+  &__title
+    font-size: 0.875em
+    margin-bottom: 1em
+    font-weight: 400
+
+  &__footer
+    display: flex
+    justify-content: space-between
+    align-items: center
+  
+  &__price
+    &-title
+      display: block
+      font-size: (11em/ 16)
+      color: #BDBDBD
+      text-transform: uppercase
+    
+    &-num
+      font-weight: 700
+      color: #000
+      font-size: 0.875em
+
+  &__add
+    background-color: #fff
+    border: 0
+    width: 2em
+    height: 2em
+    font-size: 1em
+    box-sizing: border-box
+    border-radius: 0.5em
+    padding: 0
+    cursor: pointer
