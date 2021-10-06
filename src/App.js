@@ -1,3 +1,5 @@
+import Drawer from './components/Drawer'
+
 import logo from'./images/logo.png'
 // import cart from'./images/cart.svg'
 // import favorites from'./images/favorites.svg'
@@ -6,6 +8,9 @@ import logo from'./images/logo.png'
 function App() {
   return (
     <div className="wrapper clear">
+
+      <Drawer/>
+
       <header className="header">
         <div className="header__logo">
           <img width={40} height={40} src={logo} className="header__logo-icon" alt="Logo" />
@@ -41,10 +46,21 @@ function App() {
       </header>
 
       <div className="content">
-        <h1 className="main-title">Все кроссовки</h1>
+        
+        <div className="content__header">
+          <h1 className="main-title">Все кроссовки</h1>
+          <div className="search-block">
+            <img src="./images/search.svg" alt="Search" />
+            <input type="text" placeholder="Поиск..." />
+          </div>
+        </div>
+        
         <div className="cards">
           
           <div className="card">
+            <div className="card__favourite">
+              <img src="./images/unliked.svg" alt="Unliked" />
+            </div>
             <img width="133" height="112" src="./images/goods/good-1.jpg" alt="" className="card__img" />
             <h3 className="card__title">
               Мужские Кроссовки Nike Blazer Mid Suede
