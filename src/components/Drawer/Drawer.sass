@@ -47,6 +47,11 @@
   border: 1px solid #F3F3F3
   border-radius: 1.25em
   padding: 1.25em 1.875em
+  overflow: hidden
+
+  &:not(:last-child)
+    margin-bottom: 1.5em
+    
 
   &__img
     margin-right: 1.25em
@@ -69,3 +74,9 @@
 
     &:hover
       opacity: 1
+
+.cart-sum
+  &__item
+    display: flex
+    align-items: baseline
+    justify-content: space-between
