@@ -36,10 +36,16 @@
     overflow: auto
     margin-bottom: 40px
 
-  h2
+  &__header
     margin: 0 0 1.25em
     font-size: 1.5em
+    display: flex
+    align-items: center
+    justify-content: space-between
 
+.cart-items
+  flex: 1
+  overflow: auto
 
 .cart-item
   display: flex
@@ -67,16 +73,77 @@
       font-size: 0.875em
       font-weight: 700
 
-  .removeBtn
-    cursor: pointer
-    opacity: 0.5
-    transition: opacity 0.3s ease-out
+.removeBtn
+  cursor: pointer
+  opacity: 0.5
+  transition: opacity 0.3s ease-out
 
-    &:hover
-      opacity: 1
+  &:hover
+    opacity: 1
 
 .cart-sum
   &__item
     display: flex
     align-items: baseline
     justify-content: space-between
+    font-size: 1em
+    
+    &:not(:last-child)
+      margin-bottom: 1.25em
+
+  &__item-title
+    // 
+
+  &__item-dash
+    flex: 1
+    height: 1px
+    border: 1px dashed #DFDFDF
+    margin: 0 0.5em
+
+  &__item-num
+    font-weight: 700
+
+ul.cart-sum
+  margin-top: 2.5em
+    
+  &:not(:last-child)
+    margin-bottom: 2.5em
+
+
+.cart-btn
+  &__arrow
+    right: 2em
+
+  &:hover
+    .cart-btn__arrow
+      transform: translateY(-50%)translateX(20%)
+
+.btn-green
+  width: 100%
+  background: #9DD558
+  border: 1px solid transparent
+  border-radius: 1.25em
+  font-size: 1em
+  padding: 1.125em
+  text-align: center
+  margin: 0 auto
+  color: #ffffff
+  font-weight: 600
+  transition: all .2s linear
+  cursor: pointer
+  position: relative
+
+  &:hover
+    transform: scale(1.01)
+    background-color: darken(#9DD558, 10%)
+  
+  &:active
+    transform: scale(1)
+    background-color: darken(#9DD558, 15%)
+
+  &__arrow
+    position: absolute
+    width: 0.875em
+    top: 50%
+    transform: translateY(-50%)
+    transition: all .2s linear
