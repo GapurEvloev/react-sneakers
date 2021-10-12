@@ -1,5 +1,7 @@
 import logo from'../../images/logo.png';
 
+import './Header.sass'
+
 function Header (props) {
     return (
         <header className="header">

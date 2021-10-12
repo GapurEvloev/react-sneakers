@@ -3,22 +3,32 @@ import Header from './components/Header'
 import Card from './components/Card'
 import Drawer from './components/Drawer';
 
-const arr = [
-  { title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: 12999, imageUrl: './images/goods/good-1.jpg' },
-  { title: 'Мужские Кроссовки Nike Air Max 270', price: 15600, imageUrl: './images/goods/good-2.jpg' },
-  { title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: 8499, imageUrl: './images/goods/good-3.jpg' },
-  { title: 'Кроссовки Puma X Aka Boku Future Rider', price: 12999, imageUrl: './images/goods/good-4.jpg' },
-]
+const arr = [];
 
 function App() {
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = useState(false);
+
+  React.useEffect(() => {
+    fetch('https://61659f30cb73ea001764213a.mockapi.io/items')
+      .then((res) => res.json())
+      .then((json) => setItems(json));
+  }, []);
 
   return (
     <div className="wrapper clear">
 
-      {cartOpened ? <Drawer/> : null}
+      { 
+        cartOpened && <Drawer 
+          items={cartItems}
+          onClose={() => setCartOpened(!cartOpened)} 
+          // onRemove={onRemoveItem}
+          // opened={cartOpened}
+        /> 
+      }
 
-      <Header onClickCart={() => setCartOpened(true)} />
+      <Header onClickCart={() => setCartOpened(!cartOpened)} />
 
       <div className="content">
         
@@ -32,14 +42,14 @@ function App() {
         
         <div className="cards">
           {
-            arr.map((obj, index) => (
+            items.map((obj, index) => (
               <Card 
                 title={obj.title}
                 price={obj.price}
                 imageUrl={obj.imageUrl}
                 key={index}
-                onClickFavourite={() => {console.log(obj)}}
-                onClickAdd={() => {console.log(obj)}}
+                onClickFavourite={() => {console.log("obj")}}
+                onClickAdd={() => {console.log("obj")}}
               />
             ))
           }

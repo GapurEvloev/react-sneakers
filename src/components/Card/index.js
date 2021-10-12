@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 import styles from './Card.module.sass';
 
-// console.log(styles);
 
-
-function Card(props) {
+function Card({ onClickAdd, onClickFavourite, imageUrl, title, price }) {
     // Объявление переменной состояния, которую мы назовём "isAdded"
     const [isAdded, setIsAdded] = useState(false);
 
     // Инвертирование состояния при клике на кнопку "добавить в корзину"
     const onClickPlus = () => {
+        onClickAdd();
         setIsAdded(!isAdded);
     }
 
     React.useEffect(() => {
-        console.log("gtht")
+        // console.log("gtht")
     }, [isAdded])
 
     return (
         <div className={styles.card}>
-            <div className={styles.card__favourite} onClick={props.onClickFavourite}>
+            <div className={styles.card__favourite} onClick={onClickFavourite}>
                 <img src="./images/unliked.svg" alt="Unliked" />
             </div>
-            <img width="133" height="112" src={props.imageUrl} alt="" className={styles.card__img} />
+            <img width="133" height="112" src={imageUrl} alt="" className={styles.card__img} />
             <h3 className={styles.card__title}>
-                {props.title}
+                {title}
             </h3>
             <div className={styles.card__footer}>
                 <div className={styles.card__price}>
                     <span className={styles['card__price-title']}>Цена</span>
-                    <b className={styles['card__price-num']}>{props.price} руб.</b>
+                    <b className={styles['card__price-num']}>{price} руб.</b>
                 </div>
                 <button className={styles.card__add+" button"} onClick={onClickPlus}>
                     {/* <svg className={styles["card__add-icon"]} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
