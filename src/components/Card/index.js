@@ -2,19 +2,28 @@ import React, { useState } from 'react';
 import styles from './Card.module.sass';
 
 
-function Card({ onClickAdd, onFavorite, imageUrl, title, price }) {
+function Card({ 
+    id,
+    title,
+    imageUrl,
+    price,
+    onFavorite,
+    onClickAdd,
+    favorited = false,
+    // loading = false,
+ }) {
     // Объявление переменной состояния, которую мы назовём "isAdded"
     const [isAdded, setIsAdded] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(favorited);
 
     // Инвертирование состояния при клике на кнопку "добавить в корзину"
     const onClickPlus = () => {
-        onClickAdd({title, imageUrl, price});
+        onClickAdd({id, title, imageUrl, price});
         setIsAdded(!isAdded);
     }
     
     const onClickFavorite = () => {
-        onFavorite({title, imageUrl, price});
+        onFavorite({id, title, imageUrl, price});
         setIsFavorite(!isFavorite)
     }
 
