@@ -2,26 +2,32 @@ import React, { useState } from 'react';
 import styles from './Card.module.sass';
 
 
-function Card({ onClickAdd, onClickFavourite, imageUrl, title, price }) {
+function Card({ onClickAdd, onFavorite, imageUrl, title, price }) {
     // Объявление переменной состояния, которую мы назовём "isAdded"
     const [isAdded, setIsAdded] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     // Инвертирование состояния при клике на кнопку "добавить в корзину"
     const onClickPlus = () => {
-        onClickAdd();
+        onClickAdd({title, imageUrl, price});
         setIsAdded(!isAdded);
     }
+    
+    const onClickFavorite = () => {
+        onFavorite({title, imageUrl, price});
+        setIsFavorite(!isFavorite)
+    }
 
-    React.useEffect(() => {
-        // console.log("gtht")
-    }, [isAdded])
+    // React.useEffect(() => {
+    //     // console.log("gtht")
+    // }, [isAdded])
 
     return (
         <div className={styles.card}>
-            <div className={styles.card__favourite} onClick={onClickFavourite}>
-                <img src="./images/unliked.svg" alt="Unliked" />
+            <div className={styles.card__favorite} onClick={onClickFavorite}>
+                <img src={isFavorite ? "./images/liked.svg" : "./images/unliked.svg"} alt="Unliked" />
             </div>
-            <img width="133" height="112" src={imageUrl} alt="" className={styles.card__img} />
+            <img width="133" height="112" src={imageUrl} alt="good" className={styles.card__img} />
             <h3 className={styles.card__title}>
                 {title}
             </h3>
@@ -35,7 +41,7 @@ function Card({ onClickAdd, onClickFavourite, imageUrl, title, price }) {
                         <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="white" stroke="#F2F2F2"/>
                         <path d="M20.6653 15.1312H17.2021V11.6682C17.2021 10.3328 15.1311 10.3328 15.1311 11.6682V15.1312H11.668C10.3329 15.1312 10.3329 17.2022 11.668 17.2022H15.1311V20.6652C15.1311 22.0005 17.2021 22.0005 17.2021 20.6652V17.2022H20.6653C22.0005 17.2022 22.0005 15.1312 20.6653 15.1312Z" fill="#D3D3D3"/>
                     </svg> */}
-                    <img className={styles["card__add-icon"]} width="32" height="32" src={isAdded ? "./images/btn-checked.svg" : "./images/btn-plus.svg"} alt="" />
+                    <img className={styles["card__add-icon"]} width="32" height="32" src={isAdded ? "./images/btn-checked.svg" : "./images/btn-plus.svg"} alt="add" />
                 </button>
             </div>
         </div>
