@@ -31,8 +31,20 @@ function App() {
   }, []);
 
   const onAddToCart = (obj) => {
-    axios.post('https://60d62397943aa60017768e77.mockapi.io/cart', obj);
-    setCartItems(prev => [...prev, obj])
+    if(cartItems.find((cartObj) => Number(cartObj) === Number(obj.id))) {
+      // axios.delete(`https://60d62397943aa60017768e77.mockapi.io/cart/${obj.id}`);
+      setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)))
+    } else {
+      axios.post('https://60d62397943aa60017768e77.mockapi.io/cart', obj);
+      setCartItems(prev => [...prev, obj])
+    }
+
+
+    // try {
+      
+    // } catch (error) {
+      
+    // }
   }
 
   const onRemoveItem = (id) => {

@@ -30,12 +30,12 @@ function Home({
             .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
             .map((item, index) => (
             <Card 
-              {...item}
               key={item.id}
-              onFavorite={onAddToFavorite}
+              onFavorite={(obj) => onAddToFavorite(obj)}
               onClickAdd={
-                onAddToCart
+                (obj) => onAddToCart(obj)
               }
+              {...item}
             />
           ))
         }
