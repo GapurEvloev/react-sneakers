@@ -17,34 +17,33 @@ function App() {
   const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState('');
   const [cartOpened, setCartOpened] = useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    axios.get('https://61659f30cb73ea001764213a.mockapi.io/items').then( res => {
-      setItems(res.data);
-    });
-    axios.get('https://60d62397943aa60017768e77.mockapi.io/cart').then( res => {
-      setCartItems(res.data);
-    });
-    axios.get('https://60d62397943aa60017768e77.mockapi.io/favorites').then( res => {
-      setFavorites(res.data);
-    });
+    async function fetchData () {
+      const cartResonse = await axios.get('https://60d62397943aa60017768e77.mockapi.io/cart');
+      const favoritesResonse = await axios.get('https://60d62397943aa60017768e77.mockapi.io/favorites');
+      const itemsResonse = await axios.get('https://61659f30cb73ea001764213a.mockapi.io/items');
+      
+      setCartItems(cartResonse.data);
+      setFavorites(favoritesResonse.data);
+      setItems(itemsResonse.data);
+    }
+    fetchData ();
   }, []);
 
   const onAddToCart = (obj) => {
-    if(cartItems.find((cartObj) => Number(cartObj) === Number(obj.id))) {
-      // axios.delete(`https://60d62397943aa60017768e77.mockapi.io/cart/${obj.id}`);
-      setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)))
-    } else {
-      axios.post('https://60d62397943aa60017768e77.mockapi.io/cart', obj);
-      setCartItems(prev => [...prev, obj])
+    try {
+      if(cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        axios.delete(`https://60d62397943aa60017768e77.mockapi.io/cart/${obj.id}`);
+        setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)));
+      } else {
+        axios.post('https://60d62397943aa60017768e77.mockapi.io/cart', obj);
+        setCartItems(prev => [...prev, obj])
+      }
+    } catch (error) {
+      alert('Не удалось добавить!')
     }
-
-
-    // try {
-      
-    // } catch (error) {
-      
-    // }
   }
 
   const onRemoveItem = (id) => {
@@ -68,7 +67,6 @@ function App() {
 
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
-    // console.log(event.target.value);
   } 
 
   return (
