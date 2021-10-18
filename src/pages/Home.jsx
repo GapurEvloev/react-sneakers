@@ -1,8 +1,8 @@
-import Card from '../components/Card'
+import React from 'react';
+import Card from '../components/Card';
 
 function Home({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   onChangeSearchInput,
@@ -12,29 +12,18 @@ function Home({
 }) {
 
   const renderItems = () => {
-    // const filtredItems = items.filter((item) =>
-    //   item.title.toLowerCase().includes(searchValue.toLowerCase()),
-    // );
-    // return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
-    //   <Card
-    //     key={index}
-    //     onFavorite={(obj) => onAddToFavorite(obj)}
-    //     onPlus={(obj) => onAddToCart(obj)}
-    //     loading={isLoading}
-    //     {...item}
-    //   />
-    // ));
-    return items
-      .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-      .map((item, index) => (
+    const filtredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+    
+    return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
       <Card 
-        key={item.id}
+        key={index}
         onFavorite={(obj) => onAddToFavorite(obj)}
         onClickAdd={
           (obj) => onAddToCart(obj)
         }
-        added={cartItems.some(obj => Number(obj.id) === Number(item.id))}
-        loading={false}
+        loading={isLoading}
         {...item}
       />
     ))

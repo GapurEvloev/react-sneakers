@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ContentLoader from "react-content-loader";
 
+import AppContext from '../../context'
+
 import styles from './Card.module.sass';
 
 function Card({ 
@@ -11,17 +13,14 @@ function Card({
     onFavorite,
     onClickAdd,
     favorited = false,
-    added = false,
     loading = false,
  }) {
-    // Объявление переменной состояния, которую мы назовём "isAdded"
-    const [isAdded, setIsAdded] = useState(added);
+    const {isItemAdded} = React.useContext(AppContext);
     const [isFavorite, setIsFavorite] = useState(favorited);
 
     // Инвертирование состояния при клике на кнопку "добавить в корзину"
     const onClickPlus = () => {
         onClickAdd({id, title, imageUrl, price});
-        setIsAdded(!isAdded);
     }
     
     const onClickFavorite = () => {
@@ -64,7 +63,7 @@ function Card({
                             <b className={styles['card__price-num']}>{price} руб.</b>
                         </div>
                         <button className={styles.card__add+" button"} onClick={onClickPlus}>
-                            <img className={styles["card__add-icon"]} width="32" height="32" src={isAdded ? "./images/btn-checked.svg" : "./images/btn-plus.svg"} alt="add" />
+                            <img className={styles["card__add-icon"]} width="32" height="32" src={isItemAdded(id) ? "./images/btn-checked.svg" : "./images/btn-plus.svg"} alt="add" />
                         </button>
                     </div>
                 </>
