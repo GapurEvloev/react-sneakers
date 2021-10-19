@@ -8,8 +8,7 @@ export const Info = ({ title, image, description }) => {
             <img 
                 className="mb-20" 
                 width="120px" 
-                src={image} 
-                // src='./images/empty-cart.jpg' 
+                src={image}
                 alt="Empty" 
             />
             <h2>
