@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 
-import AppContext from '../../context'
-
 import Info from '../Info';
+import { useCart } from '../../hooks/useCart';
 
 import './Drawer.sass';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer ({ onClose, onRemove, items = []}) {
-  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const { cartItems, setCartItems, totalPrice } = useCart();
   const [orderId, setOrderId] = React.useState(null);
   const [ isOrderComplete, setIsOrderComplete ] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -85,13 +84,13 @@ function Drawer ({ onClose, onRemove, items = []}) {
                 <li className="cart-sum__item">
                   <span className="cart-sum__item-title">Итого</span>
                   <div className="cart-sum__item-dash"></div>
-                  <b className="cart-sum__item-num">21 498 руб.</b>
+                  <b className="cart-sum__item-num">{totalPrice} руб.</b>
                   {/* <b className="cart-sum__item-num">{totalPrice} руб. </b> */}
                 </li>
                 <li className="cart-sum__item">
                   <span className="cart-sum__item-title">Налог 5%</span>
                   <div className="cart-sum__item-dash"></div>
-                  <b className="cart-sum__item-num">1074 руб.</b>
+                  <b className="cart-sum__item-num">{totalPrice * 0.05 } руб.</b>
                   {/* <b className="cart-sum__item-num">{(totalPrice / 100) * 5} руб. </b> */}
                 </li>
               </ul>

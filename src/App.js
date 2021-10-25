@@ -9,15 +9,15 @@ import Drawer from './components/Drawer';
 
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
-// import Orders from './pages/Orders';
+import Orders from './pages/Orders';
 
 function App() {
   const [items, setItems] = useState([]);
-  const [cartItems, setCartItems] = React.useState([]);
-  const [favorites, setFavorites] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState('');
+  const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   const [cartOpened, setCartOpened] = useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
     async function fetchData () {
@@ -107,9 +107,9 @@ function App() {
           <Favorites />
         </Route>
 
-        {/* <Route path="orders" exact>
+        <Route path="/orders" exact>
           <Orders />
-        </Route> */}
+        </Route>
 
       </div>
     </AppContext.Provider>
