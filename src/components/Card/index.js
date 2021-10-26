@@ -17,14 +17,15 @@ function Card({
  }) {
     const {isItemAdded} = React.useContext(AppContext);
     const [isFavorite, setIsFavorite] = useState(favorited);
+    const obj = {id, parentId: id, title, imageUrl, price};
 
     // Инвертирование состояния при клике на кнопку "добавить в корзину"
     const onClickPlus = () => {
-        onClickAdd({id, title, imageUrl, price});
+        onClickAdd(obj);
     }
     
     const onClickFavorite = () => {
-        onFavorite({id, title, imageUrl, price});
+        onFavorite(obj);
         setIsFavorite(!isFavorite)
     }
 
@@ -50,9 +51,9 @@ function Card({
                     <rect x="0" y="200" rx="5" ry="5" width="80" height="32" /> 
                     <rect x="118" y="200" rx="10" ry="10" width="32" height="32" />
                 </ContentLoader> : <>
-                    <div className={styles.card__favorite} onClick={onClickFavorite}>
+                    {onFavorite && <div className={styles.card__favorite} onClick={onClickFavorite}>
                         <img src={isFavorite ? "./images/liked.svg" : "./images/unliked.svg"} alt="Unliked" />
-                    </div>
+                    </div>}
                     <img width="100%" height="135" src={imageUrl} alt="good" className={styles.card__img} />
                     <h3 className={styles.card__title}>
                         {title}
@@ -62,9 +63,9 @@ function Card({
                             <span className={styles['card__price-title']}>Цена</span>
                             <b className={styles['card__price-num']}>{price} руб.</b>
                         </div>
-                        <button className={styles.card__add+" button"} onClick={onClickPlus}>
+                        {onClickAdd && <button className={styles.card__add+" button"} onClick={onClickPlus}>
                             <img className={styles["card__add-icon"]} width="32" height="32" src={isItemAdded(id) ? "./images/btn-checked.svg" : "./images/btn-plus.svg"} alt="add" />
-                        </button>
+                        </button>}
                     </div>
                 </>
             }

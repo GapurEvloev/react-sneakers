@@ -1,10 +1,10 @@
 import React from 'react';
 import AppContext from '../../context'
 
-export const Info = ({ title, image, description }) => {
+export const Info = ({ title, image, description, styles }) => {
     const {setCartOpened} = React.useContext(AppContext)
     return (
-        <div className="cartEmpty d-flex align-center justify-center flex-column flex">
+        <div className={`${styles.cartEmpty} d-flex align-center justify-center flex-column flex`}>
             <img 
                 className="mb-20" 
                 width="120px" 
@@ -20,7 +20,7 @@ export const Info = ({ title, image, description }) => {
             </p>
             <button 
                 onClick={() => setCartOpened(false)} 
-                className="btn btn-green"
+                className={`btn ${styles['btn-green']} ${styles['cart-btn']}`}
             >
                 <img src="./images/arrow.svg" alt="Arrow" />
                 Вернуться назад
